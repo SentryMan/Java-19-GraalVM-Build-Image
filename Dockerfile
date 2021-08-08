@@ -24,3 +24,6 @@ ENV PATH=$PATH:$HOME/jdk/graalvm-ce-java16-21.3.0-dev/bin:$JAVA_HOME
 
 # Install native image utility
 RUN gu install native-image
+
+# check native image version
+RUN native-image --version
