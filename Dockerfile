@@ -9,18 +9,19 @@ WORKDIR $HOME
 
 # Install native image compiler dependencies
 RUN dnf config-manager --set-enabled ol8_codeready_builder \
-    && dnf install -y wget tar gcc glibc-devel zlib-devel libstdc++-static
+    && dnf install -y wget tar gcc glibc-devel zlib-devel libstdc++-static zlib-static
 
+ENV JDK_VERSION=19
+ENV GRAAL_VERSION=22.3.0-dev-20220915_2039
 # Install GraalVM JDK 16 and add to PATH
 RUN cd jdk \
-    && wget "https://github.com/graalvm/graalvm-ce-dev-builds/releases/download/21.3.0-dev-20210817_2030/graalvm-ce-java16-linux-amd64-dev.tar.gz" \
-    && tar -xzf graalvm-ce-java16-linux-amd64-dev.tar.gz 
+    && wget -c -O - "https://github.com/graalvm/graalvm-ce-dev-builds/releases/download/${GRAAL_VERSION}/graalvm-ce-java${JDK_VERSION}-linux-amd64-dev.tar.gz" | tar -xvz
 
 # RUN curl -L -o musl.tar.gz https://musl.libc.org/releases/musl-1.2.2.tar.gz && \
 #     tar -xvzf musl.tar.gz
 
-ENV JAVA_HOME=$HOME/jdk/graalvm-ce-java16-21.3.0-dev
-ENV PATH=$PATH:$HOME/jdk/graalvm-ce-java16-21.3.0-dev/bin:$JAVA_HOME
+ENV JAVA_HOME=$HOME/jdk/graalvm-ce-java$JDK_VERSION-22.3.0-dev
+ENV PATH=$PATH:$JAVA_HOME/bin
 
 # Install native image utility
 RUN gu install native-image
