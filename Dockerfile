@@ -12,7 +12,7 @@ RUN dnf config-manager --set-enabled ol8_codeready_builder \
     && dnf install -y wget tar gcc glibc-devel zlib-devel libstdc++-static zlib-static
 
 ENV JDK_VERSION=19
-ENV GRAAL_VERSION=22.3.0-dev-20220915_2039
+ENV GRAAL_VERSION=22.3.0-dev-20221004_1644
 # Install GraalVM JDK 16 and add to PATH
 RUN cd jdk \
     && wget -c -O - "https://github.com/graalvm/graalvm-ce-dev-builds/releases/download/${GRAAL_VERSION}/graalvm-ce-java${JDK_VERSION}-linux-amd64-dev.tar.gz" | tar -xvz
@@ -22,9 +22,3 @@ RUN cd jdk \
 
 ENV JAVA_HOME=$HOME/jdk/graalvm-ce-java$JDK_VERSION-22.3.0-dev
 ENV PATH=$PATH:$JAVA_HOME/bin
-
-# Install native image utility
-RUN gu install native-image
-
-# check native image version
-RUN native-image --version
