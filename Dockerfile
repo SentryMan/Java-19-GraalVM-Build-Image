@@ -16,8 +16,5 @@ ENV GRAAL_VERSION=23.0.0-dev-20221021_2024
 RUN cd jdk \
     && wget -c -O - "https://github.com/graalvm/graalvm-ce-dev-builds/releases/download/${GRAAL_VERSION}/graalvm-ce-java${JDK_VERSION}-linux-amd64-dev.tar.gz" | tar -xvz
 
-ENV JAVA_HOME=$HOME/jdk/graalvm-ce-java$JDK_VERSION-22.3.0-dev
+ENV JAVA_HOME=$HOME/jdk/graalvm-ce-java$JDK_VERSION-23.0.0-dev
 ENV PATH=$PATH:$JAVA_HOME/bin
-
-# Install native image utility
-RUN gu install native-image
