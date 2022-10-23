@@ -18,3 +18,6 @@ RUN cd jdk \
 
 ENV JAVA_HOME=$HOME/jdk/graalvm-ce-java$JDK_VERSION-22.3.0-dev
 ENV PATH=$PATH:$JAVA_HOME/bin
+
+# Install native image utility
+RUN gu install native-image
