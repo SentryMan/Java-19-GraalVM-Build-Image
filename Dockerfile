@@ -12,7 +12,7 @@ RUN dnf config-manager --set-enabled ol8_codeready_builder \
     && dnf install -y wget tar gcc glibc-devel zlib-devel libstdc++-static zlib-static
 
 ENV JDK_VERSION=19
-ENV GRAAL_VERSION=22.3.0-dev-20221004_1644
+ENV GRAAL_VERSION=22.3.0-dev-20221021_2024
 # Install GraalVM JDK 16 and add to PATH
 RUN cd jdk \
     && wget -c -O - "https://github.com/graalvm/graalvm-ce-dev-builds/releases/download/${GRAAL_VERSION}/graalvm-ce-java${JDK_VERSION}-linux-amd64-dev.tar.gz" | tar -xvz
